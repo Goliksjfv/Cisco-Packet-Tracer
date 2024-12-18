@@ -1,0 +1,20 @@
+en
+conf t
+host SWI
+enable secret cisco
+service password-encryption
+banner motd "Warning! Private property! "
+no ip domain-lookup
+line console 0
+mo
+password cisco
+login
+line vty 0 15
+mo
+password cisco
+login
+
+do wr
+
+
+

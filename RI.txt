@@ -1,0 +1,37 @@
+en
+conf t
+host RI
+enable secret cisco
+service password-encryption
+banner motd "Warning! Private property! "
+no ip domain-lookup
+line console 0
+password cisco
+login
+line vty 0 15
+password cisco
+login
+int g0/0
+ip addr 172.16.12.254 255.255.255.0
+no sh
+int g0/1
+ip addr 6.6.6.2 255.255.255.252
+no sh
+int g0/2
+ip addr 7.7.7.2 255.255.255.252
+no sh
+
+router ospf 1
+passive-interface g0/0
+netw 172.16.12.0 0.0.0.255 area 1
+netw 7.7.7.0 0.0.0.3 area 1
+netw 6.6.6.0 0.0.0.3 area 1
+
+int ran g0/0-g0/2
+ip help 5.5.5.1
+ip help 7.7.7.1 
+
+do wr
+
+
+
